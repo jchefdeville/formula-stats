@@ -1,18 +1,18 @@
 import React from 'react';
-import Ecurie from './Ecurie';
+import Ecurie from './EcurieDTO';
 
 const pilot1 = {
     'id':1,
     'prenom':"Lewis",
     'nom':"Hamilton",
-    'ecurie': Ecurie.ecurie1
+    'ecurie': Ecurie.ecurie2
 }
 
 const pilot2 = {
     'id':2,
     'prenom':"Max",
     'nom':"Verstappen",
-    'ecurie': Ecurie.ecurie2  // Ajout de la propriété ecurie pour le pilote2
+    'ecurie': Ecurie.ecurie1
 }
 
 const pilotes = [pilot1, pilot2];

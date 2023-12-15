@@ -1,4 +1,4 @@
-class Ecurie {
+class EcurieDTO {
   static ecurie1 = {
     id: 1,
     nom: "Red Bull"
@@ -10,4 +10,4 @@ class Ecurie {
   };
 }
 
-export default Ecurie;
+export default EcurieDTO;
