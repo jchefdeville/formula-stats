@@ -20,6 +20,9 @@ import EditionPilote, {action as editPiloteAction} from "./routes/pilote/edition
 import { action as destroyPiloteAction } from "./routes/pilote/destroy-pilote";
 
 // Ecuries
+import Ecurie, { loader as ecurieLoader } from "./routes/ecurie/ecurie";
+import EditionEcurie, {action as editEcurieAction} from "./routes/ecurie/edition-ecurie";
+import { action as destroyEcurieAction } from "./routes/ecurie/destroy-ecurie";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +31,8 @@ const router = createBrowserRouter([
     errorElement : <ErrorPage/>,
     loader : rootLoader,
     action : rootAction,
+
+    // Pilotes
     children : [{
       path: "pilotes/:idPilote/",
       element : <Pilote/>,
@@ -42,7 +47,25 @@ const router = createBrowserRouter([
     {
       path: "pilotes/:idPilote/destroy",
       action: destroyPiloteAction,
-    }]
+    },
+
+    // Ecuries
+    {
+      path: "ecuries/:idEcurie/",
+      element : <Ecurie/>,
+      loader: ecurieLoader,
+    },
+    {
+      path: "ecuries/:idEcurie/edit",
+      element : <EditionEcurie/>,
+      loader: ecurieLoader,
+      action: editEcurieAction
+    },
+    {
+      path: "ecuries/:idEcurie/destroy",
+      action: destroyEcurieAction,
+    }
+  ],
   }
 ]);
 

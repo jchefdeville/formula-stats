@@ -1,5 +1,11 @@
+import React, { useEffect, useState } from 'react';
 import { Form, useLoaderData, redirect } from "react-router-dom";
+import { getEcuries } from "../../ecuries";
 import { updatePilote } from "../../pilotes";
+
+export async function getListeEcuries() {
+  return await getEcuries();
+}
 
 export async function action({request, params}) {
     const formData = await request.formData();
@@ -11,6 +17,16 @@ export async function action({request, params}) {
 
 export default function EditPilote() {
   const { pilote } = useLoaderData();
+  const [ecuries, setEcuries] = useState([]);
+
+  useEffect(() => {
+    const fetchEcuries = async () => {
+      const ecuriesData = await getListeEcuries();
+      setEcuries(ecuriesData);
+    };
+
+    fetchEcuries();
+  }, []);
 
   return (
     <Form method="post" id="pilote-form">
@@ -32,15 +48,14 @@ export default function EditPilote() {
           defaultValue={pilote.nom}
         />
       </p>
-      <label>
-        <span>Twitter</span>
-        <input
-          type="text"
-          name="twitter"
-          placeholder="@jack"
-          defaultValue={pilote.twitter}
-        />
-      </label>
+
+      <select name="ecurie">
+        <option>Merci de sélectionner une écurie</option>
+        {ecuries.map((ecurie, index) => (
+          <option key={index}>{ecurie.nom}</option>
+        ))}
+      </select>
+
       <label>
         <span>Avatar URL</span>
         <input

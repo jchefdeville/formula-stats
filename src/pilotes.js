@@ -7,9 +7,9 @@ export async function getPilotes(query) {
   let pilotes = await localforage.getItem("pilotes");
   if (!pilotes) pilotes = [];
   if (query) {
-    pilotes = matchSorter(pilotes, query, { keys: ["first", "last"] });
+    pilotes = matchSorter(pilotes, query, { keys: ["prenom", "nom"] });
   }
-  return pilotes.sort(sortBy("last", "createdAt"));
+  return pilotes.sort(sortBy("nom", "createdAt"));
 }
 
 export async function createPilote() {

@@ -1,31 +1,30 @@
 import { Outlet, NavLink, useLoaderData, Form, redirect, useNavigation} from "react-router-dom";
-import { getPilotes, createPilote } from "../pilotes";
-import { EcurieRoot } from "./EcurieRoot";
+import { getEcuries, createEcurie } from "../ecuries";
 
 export async function loader() {
-    const pilotes = await getPilotes();
-    return { pilotes }
+    const ecuries = await getEcuries();
+    return { ecuries }
 }
 
 export async function action() {
-    const pilote  = await createPilote();
-    return redirect(`/pilotes/${pilote.id}/edit`);
+    const ecurie  = await createEcurie();
+    return redirect(`/ecuries/${ecurie.id}/edit`);
 }
 
-export default function Root() {
-    const { pilotes } = useLoaderData();
+export default function EcurieRoot() {
+    const { ecuries } = useLoaderData();
     const navigation = useNavigation();
     return (
       <>
         <div id="sidebar">
 
-          <h1>React Router Pilotes</h1>
+          <h1>React Router Ecuries</h1>
           <div>
             <form id="search-form" role="search">
               <input
                 id="q"
-                aria-label="Search pilotes"
-                placeholder="Rechercher pilote"
+                aria-label="Search ecuries"
+                placeholder="Rechercher ecurie"
                 type="search"
                 name="q"
               />
@@ -40,17 +39,17 @@ export default function Root() {
               ></div>
             </form>
             <Form method="post">
-              <button type="submit">Nouveau Pilote</button>
+              <button type="submit">Nouvelle Ecurie</button>
             </Form>
           </div>
           <nav>
             <nav>
-          {pilotes.length ? (
+          {ecuries.length ? (
             <ul>
-              {pilotes.map((pilote) => (
-                <li key={pilote.id}>
+              {ecuries.map((ecurie) => (
+                <li key={ecurie.id}>
                   <NavLink
-                    to={`pilotes/${pilote.id}`}
+                    to={`ecuries/${ecurie.id}`}
                     className={({ isActive, isPending }) =>
                       isActive
                         ? "active"
@@ -59,21 +58,21 @@ export default function Root() {
                         : ""
                     }
                   >
-                    {pilote.prenom || pilote.nom ? (
+                    {ecurie.prenom || ecurie.nom ? (
                       <>
-                        {pilote.prenom} {pilote.nom }
+                        {ecurie.prenom} {ecurie.nom }
                       </>
                     ) : (
                       <i>No Name</i>
                     )}{" "}
-                    {pilote.favorite && <span>★</span>}
+                    {ecurie.favorite && <span>★</span>}
                   </NavLink>
                 </li>
               ))}
             </ul>
           ) : (
             <p>
-              <i>No pilotes</i>
+              <i>No ecuries</i>
             </p>
           )}
         </nav>
@@ -85,7 +84,6 @@ export default function Root() {
             }>
             <Outlet/>
         </div>
-
       </>
     );
   }

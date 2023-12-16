@@ -1,51 +1,48 @@
 import { Form, useLoaderData  } from "react-router-dom";
-import { getPilote } from "../../pilotes";
+import { getEcurie } from "../../ecuries";
 
 export async function loader({ params }) {
-    const pilote = await getPilote(params.idPilote);
-    return { pilote }
+    const ecurie = await getEcurie(params.idEcurie);
+    return { ecurie }
 }
 
-export default function Pilote() {
-    const { pilote } = useLoaderData();
+export default function Ecurie() {
+    const { ecurie } = useLoaderData();
 
   return (
-    <div id="pilote">
+    <div id="ecurie">
       <div>
         <img
-          key={pilote.avatar}
-          src={pilote.avatar || null}
+          key={ecurie.avatar}
+          src={ecurie.avatar || null}
         />
       </div>
 
-      <h1>DETAIL PILOTE</h1>
+      <h1>DETAIL ECURIE</h1>
 
       <div>
         <h1>
-          {pilote.prenom || pilote.nom ? (
+          {ecurie.nom ? (
             <>
-              {pilote.prenom} {pilote.nom}
+              {ecurie.nom}
             </>
           ) : (
             <i>No Name</i>
           )}{" "}
         </h1>
 
-        <h2>Ecurie</h2>
-        {pilote.ecurie}
-
-        {pilote.twitter && (
+        {ecurie.twitter && (
           <p>
             <a
               target="_blank"
-              href={`https://twitter.com/${pilote.twitter}`}
+              href={`https://twitter.com/${ecurie.twitter}`}
             >
-              {pilote.twitter}
+              {ecurie.twitter}
             </a>
           </p>
         )}
 
-        {pilote.notes && <p>{pilote.notes}</p>}
+        {ecurie.notes && <p>{ecurie.notes}</p>}
 
         <div>
           <Form action="edit">
