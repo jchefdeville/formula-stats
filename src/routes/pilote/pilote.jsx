@@ -1,5 +1,5 @@
 import { Form, useLoaderData  } from "react-router-dom";
-import { getPilote } from "../pilotes";
+import { getPilote } from "../../pilotes";
 
 export async function loader({ params }) {
     const pilote = await getPilote(params.idPilote);
@@ -18,16 +18,17 @@ export default function Pilote() {
         />
       </div>
 
+      <h1>DETAIL PILOTE</h1>
+
       <div>
         <h1>
-          {pilote.first || pilote.last ? (
+          {pilote.prenom || pilote.nom ? (
             <>
-              {pilote.first} {pilote.last}
+              {pilote.prenom} {pilote.nom}
             </>
           ) : (
             <i>No Name</i>
           )}{" "}
-          <Favorite pilote={pilote} />
         </h1>
 
         {pilote.twitter && (
@@ -65,24 +66,5 @@ export default function Pilote() {
         </div>
       </div>
     </div>
-  );
-}
-
-function Favorite({ pilote }) {
-  let favorite = pilote.favorite;
-  return (
-    <Form method="post">
-      <button
-        name="favorite"
-        value={favorite ? "false" : "true"}
-        aria-label={
-          favorite
-            ? "Remove from favorites"
-            : "Add to favorites"
-        }
-      >
-        {favorite ? "★" : "☆"}
-      </button>
-    </Form>
   );
 }

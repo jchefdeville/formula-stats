@@ -24,7 +24,7 @@ export default function Root() {
               <input
                 id="q"
                 aria-label="Search pilotes"
-                placeholder="Search"
+                placeholder="Rechercher pilote"
                 type="search"
                 name="q"
               />
@@ -39,7 +39,7 @@ export default function Root() {
               ></div>
             </form>
             <Form method="post">
-              <button type="submit">New</button>
+              <button type="submit">Nouveau Pilote</button>
             </Form>
           </div>
           <nav>
@@ -58,9 +58,9 @@ export default function Root() {
                         : ""
                     }
                   >
-                    {pilote.first || pilote.last ? (
+                    {pilote.prenom || pilote.nom ? (
                       <>
-                        {pilote.first} {pilote.last}
+                        {pilote.prenom} {pilote.nom }
                       </>
                     ) : (
                       <i>No Name</i>
