@@ -3,5 +3,5 @@ import { deletePilote } from "../../pilotes";
 
 export async function action({ params }) {
     await deletePilote(params.idPilote);
-    return redirect("/");
+    return redirect("/pilotes/");
 }

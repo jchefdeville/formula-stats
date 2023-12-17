@@ -1,4 +1,4 @@
-import { Form, useLoaderData  } from "react-router-dom";
+import { Form, useLoaderData, NavLink } from "react-router-dom";
 import { getPilote } from "../../pilotes";
 import { getEcurie } from "../../ecuries";
 
@@ -12,7 +12,7 @@ export async function loader({ params }) {
 }
 
 export default function Pilote() {
-    const { pilote } = useLoaderData();
+  const { pilote } = useLoaderData();
 
   return (
     <div id="pilote">
@@ -37,10 +37,23 @@ export default function Pilote() {
         </h1>
 
         {pilote.ecurie && (
-          <>
+          <div>
             <h2>Ecurie</h2>
-            {pilote.ecurie.id} {pilote.ecurie.nom}
-          </>
+            <NavLink
+              key={pilote.ecurie.id}
+              to={`/ecuries/${pilote.ecurie.id}`}
+              className={({ isActive, isPending }) =>
+                isActive
+                  ? "active"
+                  : isPending
+                  ? "pending"
+                  : ""
+              }
+              >
+              {pilote.ecurie.nom}
+              {pilote.favorite && <span>★</span>}
+            </NavLink>
+          </div>
         )}
 
         {pilote.twitter && (

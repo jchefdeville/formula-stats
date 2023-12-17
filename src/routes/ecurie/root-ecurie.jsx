@@ -49,7 +49,7 @@ export default function RootEcurie() {
               {ecuries.map((ecurie) => (
                 <li key={ecurie.id}>
                   <NavLink
-                    to={`ecuries/${ecurie.id}`}
+                    to={`/ecuries/${ecurie.id}`}
                     className={({ isActive, isPending }) =>
                       isActive
                         ? "active"

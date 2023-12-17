@@ -1,8 +1,17 @@
-import { Form, useLoaderData  } from "react-router-dom";
+import { Form, useLoaderData, NavLink  } from "react-router-dom";
 import { getEcurie } from "../../ecuries";
+import { getPilotes } from "../../pilotes";
 
 export async function loader({ params }) {
     const ecurie = await getEcurie(params.idEcurie);
+
+    let pilotes = await getPilotes();
+    pilotes = pilotes.filter((pilote) => {
+      return pilote.idEcurie === ecurie.id
+    });
+
+    ecurie.pilotes = pilotes;
+
     return { ecurie }
 }
 
@@ -22,14 +31,35 @@ export default function Ecurie() {
 
       <div>
         <h1>
-          {ecurie.nom ? (
+          {ecurie.nom && (
             <>
               {ecurie.nom}
             </>
-          ) : (
-            <i>No Name</i>
-          )}{" "}
+          )}
         </h1>
+
+        {ecurie.pilotes.length && (
+          <div>
+            <h2>Pilotes</h2>
+            {ecurie.pilotes.map((pilote) => (
+              <div key={pilote.id}>
+                <NavLink
+                  to={`/pilotes/${pilote.id}`}
+                  className={({ isActive, isPending }) =>
+                    isActive
+                      ? "active"
+                      : isPending
+                      ? "pending"
+                      : ""
+                  }
+                  >
+                  {pilote.prenom} {pilote.nom }
+                  {pilote.favorite && <span>★</span>}
+                </NavLink>
+              </div>
+            ))}
+          </div>
+        )}
 
         {ecurie.twitter && (
           <p>

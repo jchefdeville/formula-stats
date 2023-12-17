@@ -1,7 +1,7 @@
 import { redirect } from "react-router-dom";
-import { deletePilote } from "../../pilotes";
+import { deleteEcurie } from "../../ecuries";
 
 export async function action({ params }) {
-    await deletePilote(params.idPilote);
-    return redirect("/");
+    await deleteEcurie(params.idEcurie);
+    return redirect("/ecuries/");
 }

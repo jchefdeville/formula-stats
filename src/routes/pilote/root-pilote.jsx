@@ -50,7 +50,7 @@ export default function RootPilote() {
               {pilotes.map((pilote) => (
                 <li key={pilote.id}>
                   <NavLink
-                    to={`pilotes/${pilote.id}`}
+                    to={`/pilotes/${pilote.id}`}
                     className={({ isActive, isPending }) =>
                       isActive
                         ? "active"
@@ -85,6 +85,10 @@ export default function RootPilote() {
             }>
             <Outlet/>
         </div>
+
+        <NavLink to="/ecuries">
+          Ecuries
+        </NavLink>
 
       </>
     );
