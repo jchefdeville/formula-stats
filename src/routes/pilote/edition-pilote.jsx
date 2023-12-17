@@ -49,10 +49,10 @@ export default function EditPilote() {
         />
       </p>
 
-      <select name="ecurie">
+      <select name="idEcurie">
         <option>Merci de sélectionner une écurie</option>
         {ecuries.map((ecurie, index) => (
-          <option key={index}>{ecurie.nom}</option>
+          <option key={index} value={ecurie.id}>{ecurie.nom}</option>
         ))}
       </select>
 

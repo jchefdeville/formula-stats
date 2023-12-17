@@ -1,6 +1,5 @@
 import { Outlet, NavLink, useLoaderData, Form, redirect, useNavigation} from "react-router-dom";
 import { getPilotes, createPilote } from "../pilotes";
-import { EcurieRoot } from "./EcurieRoot";
 
 export async function loader() {
     const pilotes = await getPilotes();
@@ -20,37 +19,12 @@ export default function Root() {
         <div id="sidebar">
 
           <h1>React Router Pilotes</h1>
-          <div>
-            <form id="search-form" role="search">
-              <input
-                id="q"
-                aria-label="Search pilotes"
-                placeholder="Rechercher pilote"
-                type="search"
-                name="q"
-              />
-              <div
-                id="search-spinner"
-                aria-hidden
-                hidden={true}
-              />
-              <div
-                className="sr-only"
-                aria-live="polite"
-              ></div>
-            </form>
-            <Form method="post">
-              <button type="submit">Nouveau Pilote</button>
-            </Form>
-          </div>
           <nav>
             <nav>
-          {pilotes.length ? (
             <ul>
-              {pilotes.map((pilote) => (
-                <li key={pilote.id}>
+                <li>
                   <NavLink
-                    to={`pilotes/${pilote.id}`}
+                    to="pilotes"
                     className={({ isActive, isPending }) =>
                       isActive
                         ? "active"
@@ -59,23 +33,25 @@ export default function Root() {
                         : ""
                     }
                   >
-                    {pilote.prenom || pilote.nom ? (
-                      <>
-                        {pilote.prenom} {pilote.nom }
-                      </>
-                    ) : (
-                      <i>No Name</i>
-                    )}{" "}
-                    {pilote.favorite && <span>★</span>}
+                  Pilotes
                   </NavLink>
                 </li>
-              ))}
+
+                <li>
+                  <NavLink
+                    to="ecuries"
+                    className={({ isActive, isPending }) =>
+                      isActive
+                        ? "active"
+                        : isPending
+                        ? "pending"
+                        : ""
+                    }
+                  >
+                  Ecuries
+                  </NavLink>
+                </li>
             </ul>
-          ) : (
-            <p>
-              <i>No pilotes</i>
-            </p>
-          )}
         </nav>
           </nav>
         </div>

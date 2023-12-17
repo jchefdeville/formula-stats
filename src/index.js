@@ -15,12 +15,14 @@ from "./routes/root";
 import ErrorPage from "./error-page";
 
 // Pilotes
-import Pilote, { loader as piloteLoader } from "./routes/pilote/pilote";
+import PiloteRoot, { loader as rootPiloteLoader } from "./routes/pilote/root-pilote";
+import Pilote, { loader as piloteLoader } from "./routes/pilote/affichage-pilote";
 import EditionPilote, {action as editPiloteAction} from "./routes/pilote/edition-pilote";
 import { action as destroyPiloteAction } from "./routes/pilote/destroy-pilote";
 
 // Ecuries
-import Ecurie, { loader as ecurieLoader } from "./routes/ecurie/ecurie";
+import EcurieRoot, { loader as rootEcurieLoader } from "./routes/ecurie/root-ecurie";
+import Ecurie, { loader as ecurieLoader } from "./routes/ecurie/affichage-ecurie";
 import EditionEcurie, {action as editEcurieAction} from "./routes/ecurie/edition-ecurie";
 import { action as destroyEcurieAction } from "./routes/ecurie/destroy-ecurie";
 
@@ -34,9 +36,14 @@ const router = createBrowserRouter([
 
     // Pilotes
     children : [{
+      path: "pilotes/",
+      element : <PiloteRoot/>,
+      loader: rootPiloteLoader
+    },
+    {
       path: "pilotes/:idPilote/",
       element : <Pilote/>,
-      loader: piloteLoader,
+      loader: piloteLoader
     },
     {
       path: "pilotes/:idPilote/edit",
@@ -46,14 +53,19 @@ const router = createBrowserRouter([
     },
     {
       path: "pilotes/:idPilote/destroy",
-      action: destroyPiloteAction,
+      action: destroyPiloteAction
     },
 
     // Ecuries
     {
+      path: "ecuries/",
+      element : <EcurieRoot/>,
+      loader: rootEcurieLoader
+    },
+    {
       path: "ecuries/:idEcurie/",
       element : <Ecurie/>,
-      loader: ecurieLoader,
+      loader: ecurieLoader
     },
     {
       path: "ecuries/:idEcurie/edit",
@@ -63,7 +75,7 @@ const router = createBrowserRouter([
     },
     {
       path: "ecuries/:idEcurie/destroy",
-      action: destroyEcurieAction,
+      action: destroyEcurieAction
     }
   ],
   }

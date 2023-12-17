@@ -1,8 +1,13 @@
 import { Form, useLoaderData  } from "react-router-dom";
 import { getPilote } from "../../pilotes";
+import { getEcurie } from "../../ecuries";
 
 export async function loader({ params }) {
     const pilote = await getPilote(params.idPilote);
+
+    let ecurie = await getEcurie(pilote.idEcurie);
+    pilote.ecurie = ecurie;
+
     return { pilote }
 }
 
@@ -31,8 +36,12 @@ export default function Pilote() {
           )}{" "}
         </h1>
 
-        <h2>Ecurie</h2>
-        {pilote.ecurie}
+        {pilote.ecurie && (
+          <>
+            <h2>Ecurie</h2>
+            {pilote.ecurie.id} {pilote.ecurie.nom}
+          </>
+        )}
 
         {pilote.twitter && (
           <p>

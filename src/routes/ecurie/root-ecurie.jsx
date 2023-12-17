@@ -1,5 +1,5 @@
 import { Outlet, NavLink, useLoaderData, Form, redirect, useNavigation} from "react-router-dom";
-import { getEcuries, createEcurie } from "../ecuries";
+import { getEcuries, createEcurie } from "../../ecuries";
 
 export async function loader() {
     const ecuries = await getEcuries();
@@ -11,7 +11,7 @@ export async function action() {
     return redirect(`/ecuries/${ecurie.id}/edit`);
 }
 
-export default function EcurieRoot() {
+export default function RootEcurie() {
     const { ecuries } = useLoaderData();
     const navigation = useNavigation();
     return (
