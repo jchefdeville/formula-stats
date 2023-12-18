@@ -30,7 +30,7 @@ export default function Ecurie() {
           <div>
             <h2>Pilotes</h2>
             {ecurie.pilotes.map((pilote) => (
-              <div key={pilote.id}>
+              <div key={pilote.id} className="d-flex align-items-center">
                 <NavLink
                   to={`/pilotes/${pilote.id}`}
                   className={({ isActive, isPending }) =>
@@ -42,8 +42,14 @@ export default function Ecurie() {
                   }
                   >
                   {pilote.prenom} {pilote.nom }
-                  {pilote.favorite && <span>★</span>}
                 </NavLink>
+
+                <Form
+                  method="delete"
+                  action={`remove-pilote/${pilote.id}`}
+                >
+                  <button type="submit" className="btn btn-danger btn-sm ml-2" style={{marginLeft: '10px'}}>X</button>
+                </Form>
               </div>
             ))}
           </div>
@@ -53,7 +59,7 @@ export default function Ecurie() {
 
         <div id="boutons">
           <Form action="edit">
-            <button type="submit">Edit</button>
+            <button type="submit">Modifier l'écurie</button>
           </Form>
           <Form
             method="post"
@@ -61,14 +67,14 @@ export default function Ecurie() {
             onSubmit={(event) => {
               if (
                 !window.confirm(
-                  "Please confirm you want to delete this record."
+                  "Êtes-vous sûr de vouloir supprimer cette écurie ?"
                 )
               ) {
                 event.preventDefault();
               }
             }}
           >
-            <button type="submit">Delete</button>
+            <button type="submit">Supprimer écurie</button>
           </Form>
         </div>
       </div>

@@ -28,6 +28,10 @@ export default function EditPilote() {
     setSelectedEcurie(e.target.value);
   };
 
+  const handleCancel = () => {
+    redirect(`/pilotes/${pilote.id}`);
+  };
+
   return (
     <Form method="post" id="pilote-form">
       <h1>EDITION PILOTE</h1>
@@ -87,8 +91,8 @@ export default function EditPilote() {
       
       <div id="boutons">
         <p>
-          <button type="submit">Save</button>
-          <button type="button">Cancel</button>
+          <button type="submit">Sauvegarder</button>
+          <button type="button" onClick={handleCancel}>Annuler</button>
         </p>
       </div>
     </Form>

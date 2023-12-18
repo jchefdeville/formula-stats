@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import "./index.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {
   createBrowserRouter,
@@ -25,6 +26,7 @@ import EcurieRoot, { loader as rootEcurieLoader, action as rootEcurieAction } fr
 import Ecurie, { loader as ecurieLoader } from "./routes/ecurie/affichage-ecurie";
 import EditionEcurie, {action as editEcurieAction} from "./routes/ecurie/edition-ecurie";
 import { action as destroyEcurieAction } from "./routes/ecurie/destroy-ecurie";
+import { action as removePiloteFromEcurieAction } from "./routes/ecurie/remove-pilote-from-ecurie";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +80,10 @@ const router = createBrowserRouter([
     {
       path: "/ecuries/:idEcurie/destroy",
       action: destroyEcurieAction
+    },
+    {
+      path: "/ecuries/:idEcurie/remove-pilote/:idPilote",
+      action: removePiloteFromEcurieAction
     }
   ],
   }

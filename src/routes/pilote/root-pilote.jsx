@@ -44,50 +44,47 @@ export default function RootPilote() {
           </div>
           <nav>
             <nav>
-          {pilotes.length ? (
-            <ul>
-              {pilotes.map((pilote) => (
-                <li key={pilote.id}>
-                  <NavLink
-                    to={`/pilotes/${pilote.id}`}
-                    className={({ isActive, isPending }) =>
-                      isActive
-                        ? "active"
-                        : isPending
-                        ? "pending"
-                        : ""
-                    }
-                  >
-                    {pilote.prenom || pilote.nom ? (
-                      <>
-                        {pilote.prenom} {pilote.nom }
-                      </>
-                    ) : (
-                      <i>No Name</i>
-                    )}{" "}
-                    {pilote.favorite && <span>★</span>}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>
-              <i>No pilotes</i>
-            </p>
-          )}
-        </nav>
+              {pilotes.length ? (
+                <ul>
+                  {pilotes.map((pilote) => (
+                    <li key={pilote.id}>
+                      <NavLink
+                        to={`/pilotes/${pilote.id}`}
+                        className={({ isActive, isPending }) =>
+                          isActive
+                            ? "active"
+                            : isPending
+                            ? "pending"
+                            : ""
+                        }
+                      >
+                        {pilote.prenom || pilote.nom ? (
+                          <>
+                            {pilote.prenom} {pilote.nom }
+                          </>
+                        ) : (
+                          <i>No Name</i>
+                        )}{" "}
+                        {pilote.numero && <> #{pilote.numero}</>}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>
+                  <i>No pilotes</i>
+                </p>
+              )}
+            </nav>
           </nav>
         </div>
+
         <div id="detail"
             className={
                 navigation.state === "loading" ? "loading" : ""
             }>
             <Outlet/>
         </div>
-
-        <NavLink to="/ecuries">
-          Ecuries
-        </NavLink>
 
       </>
     );

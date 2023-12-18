@@ -25,7 +25,7 @@ export default function Pilote() {
       <div>
         <h1>
           {pilote.prenom} {' '}
-          <span style={{ color: pilote.ecurie.couleur }}>
+          <span style={{ color: pilote.ecurie && pilote.ecurie.couleur }}>
             {pilote.nom}
           </span>
           {pilote.numero && <> #{pilote.numero}</>}

@@ -29,12 +29,14 @@ export async function getEcurie(id) {
   let ecuries = await localforage.getItem("ecuries");
   let ecurie = ecuries.find(ecurie => ecurie.id === id);
 
-  let pilotes = await getPilotes();
-  pilotes = pilotes.filter((pilote) => {
-    return pilote.idEcurie === ecurie.id
-  });
+  if (ecurie != null) {
+    let pilotes = await getPilotes();
+    pilotes = pilotes.filter((pilote) => {
+      return pilote.idEcurie === id
+    });
 
-  ecurie.pilotes = pilotes;
+    ecurie.pilotes = pilotes;
+  }
 
   return ecurie ?? null;
 }
