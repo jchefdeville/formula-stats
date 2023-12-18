@@ -1,6 +1,7 @@
 import localforage from "localforage";
 import { matchSorter } from "match-sorter";
 import sortBy from "sort-by";
+import { getEcurie } from "./ecuries";
 
 export async function getPilotes(query) {
   await fakeNetwork(`getPilotes:${query}`);
@@ -26,6 +27,11 @@ export async function getPilote(id) {
   await fakeNetwork(`pilote:${id}`);
   let pilotes = await localforage.getItem("pilotes");
   let pilote = pilotes.find(pilote => pilote.id === id);
+
+  // Récupération écurie du pilote
+  let ecurie = await getEcurie(pilote.idEcurie);
+  pilote.ecurie = ecurie;
+
   return pilote ?? null;
 }
 

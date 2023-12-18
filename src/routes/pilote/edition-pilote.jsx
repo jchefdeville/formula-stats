@@ -3,10 +3,6 @@ import { Form, useLoaderData, redirect } from "react-router-dom";
 import { getEcuries } from "../../ecuries";
 import { updatePilote } from "../../pilotes";
 
-export async function getListeEcuries() {
-  return await getEcuries();
-}
-
 export async function action({request, params}) {
     const formData = await request.formData();
     const updates = Object.fromEntries(formData);
@@ -14,24 +10,28 @@ export async function action({request, params}) {
     return redirect(`/pilotes/${params.idPilote}`);
 }
 
-
 export default function EditPilote() {
   const { pilote } = useLoaderData();
   const [ecuries, setEcuries] = useState([]);
+  const [selectedEcurie, setSelectedEcurie] = useState(pilote.idEcurie);
 
   useEffect(() => {
     const fetchEcuries = async () => {
-      const ecuriesData = await getListeEcuries();
+      const ecuriesData = await getEcuries();
       setEcuries(ecuriesData);
     };
 
     fetchEcuries();
   }, []);
 
+  const handleSelectChange = (e) => {
+    setSelectedEcurie(e.target.value);
+  };
+
   return (
     <Form method="post" id="pilote-form">
       <h1>EDITION PILOTE</h1>
-      <p>
+      <div>
         <span>Name</span>
         <input
           placeholder="Prénom"
@@ -47,37 +47,50 @@ export default function EditPilote() {
           name="nom"
           defaultValue={pilote.nom}
         />
-      </p>
+      </div>
 
-      <select name="idEcurie">
-        <option>Merci de sélectionner une écurie</option>
-        {ecuries.map((ecurie, index) => (
-          <option key={index} value={ecurie.id}>{ecurie.nom}</option>
-        ))}
-      </select>
-
-      <label>
-        <span>Avatar URL</span>
+      <div>
+      <span>Numéro</span>
         <input
-          placeholder="https://example.com/avatar.jpg"
-          aria-label="Avatar URL"
-          type="text"
-          name="avatar"
-          defaultValue={pilote.avatar}
+          placeholder="Numéro"
+          aria-label="Numéro"
+          type="number"
+          name="numero"
+          defaultValue={pilote.numero}
         />
-      </label>
-      <label>
-        <span>Notes</span>
-        <textarea
-          name="notes"
-          defaultValue={pilote.notes}
-          rows={6}
-        />
-      </label>
-      <p>
-        <button type="submit">Save</button>
-        <button type="button">Cancel</button>
-      </p>
+      </div>
+
+      <div>
+        <span>Ecurie</span> 
+        <select name="idEcurie" value={selectedEcurie} onChange={handleSelectChange}>
+          <option>--</option>
+          {ecuries.map((ecurie, index) => (
+            <option key={index} value={ecurie.id}>
+                {ecurie.nom}
+              </option>
+          ))}
+        </select>
+      </div>
+        
+      <div>
+        <label>
+          <span>Avatar URL</span>
+          <input
+            placeholder="https://example.com/avatar.jpg"
+            aria-label="Avatar URL"
+            type="text"
+            name="avatar"
+            defaultValue={pilote.avatar}
+          />
+        </label>
+      </div>
+      
+      <div id="boutons">
+        <p>
+          <button type="submit">Save</button>
+          <button type="button">Cancel</button>
+        </p>
+      </div>
     </Form>
   );
 }

@@ -1,17 +1,8 @@
 import { Form, useLoaderData, NavLink  } from "react-router-dom";
 import { getEcurie } from "../../ecuries";
-import { getPilotes } from "../../pilotes";
 
 export async function loader({ params }) {
     const ecurie = await getEcurie(params.idEcurie);
-
-    let pilotes = await getPilotes();
-    pilotes = pilotes.filter((pilote) => {
-      return pilote.idEcurie === ecurie.id
-    });
-
-    ecurie.pilotes = pilotes;
-
     return { ecurie }
 }
 
@@ -24,18 +15,15 @@ export default function Ecurie() {
         <img
           key={ecurie.avatar}
           src={ecurie.avatar || null}
+          width={100}
         />
       </div>
 
       <h1>DETAIL ECURIE</h1>
 
       <div>
-        <h1>
-          {ecurie.nom && (
-            <>
-              {ecurie.nom}
-            </>
-          )}
+        <h1 style={{ color: ecurie.couleur }}>
+          {ecurie.nom}
         </h1>
 
         {ecurie.pilotes.length && (
@@ -61,20 +49,9 @@ export default function Ecurie() {
           </div>
         )}
 
-        {ecurie.twitter && (
-          <p>
-            <a
-              target="_blank"
-              href={`https://twitter.com/${ecurie.twitter}`}
-            >
-              {ecurie.twitter}
-            </a>
-          </p>
-        )}
-
         {ecurie.notes && <p>{ecurie.notes}</p>}
 
-        <div>
+        <div id="boutons">
           <Form action="edit">
             <button type="submit">Edit</button>
           </Form>

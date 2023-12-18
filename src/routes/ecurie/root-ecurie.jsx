@@ -50,6 +50,7 @@ export default function RootEcurie() {
                 <li key={ecurie.id}>
                   <NavLink
                     to={`/ecuries/${ecurie.id}`}
+                    style={{ color: ecurie.couleur }}
                     className={({ isActive, isPending }) =>
                       isActive
                         ? "active"

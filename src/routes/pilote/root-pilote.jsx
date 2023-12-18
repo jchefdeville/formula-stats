@@ -1,6 +1,5 @@
 import { Outlet, NavLink, useLoaderData, Form, redirect, useNavigation} from "react-router-dom";
 import { getPilotes, createPilote } from "../../pilotes";
-import { EcurieRoot } from "../ecurie/root-ecurie";
 
 export async function loader() {
     const pilotes = await getPilotes();

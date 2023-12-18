@@ -15,7 +15,8 @@ export default function EditEcurie() {
   return (
     <Form method="post" id="ecurie-form">
       <h1>EDITION ECURIE</h1>
-      <p>
+
+      <div>
         <span>Name</span>
         <input
           placeholder="Nom"
@@ -24,8 +25,20 @@ export default function EditEcurie() {
           name="nom"
           defaultValue={ecurie.nom}
         />
-      </p>
-      <label>
+      </div>
+
+      <div>
+        <span>Couleur</span>
+        <input
+          placeholder="#123456"
+          aria-label="Couleur"
+          type="text"
+          name="couleur"
+          defaultValue={ecurie.couleur}
+        />
+      </div>
+
+      <div>
         <span>Avatar URL</span>
         <input
           placeholder="https://example.com/avatar.jpg"
@@ -34,19 +47,12 @@ export default function EditEcurie() {
           name="avatar"
           defaultValue={ecurie.avatar}
         />
-      </label>
-      <label>
-        <span>Notes</span>
-        <textarea
-          name="notes"
-          defaultValue={ecurie.notes}
-          rows={6}
-        />
-      </label>
-      <p>
+      </div>
+
+      <div id="boutons">
         <button type="submit">Save</button>
         <button type="button">Cancel</button>
-      </p>
+      </div>
     </Form>
   );
 }
