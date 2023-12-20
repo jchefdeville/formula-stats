@@ -19,14 +19,14 @@ export default function Ecurie() {
         />
       </div>
 
-      <h1>DETAIL ECURIE</h1>
-
       <div>
-        <h1 style={{ color: ecurie.couleur }}>
-          {ecurie.nom}
-        </h1>
+        <div>
+          <h1 style={{ color: ecurie.couleur }}>
+            {ecurie.nom}
+          </h1>
+        </div>
 
-        {ecurie.pilotes.length && (
+        {ecurie.pilotes.length > 0 && (
           <div>
             <h2>Pilotes</h2>
             {ecurie.pilotes.map((pilote) => (
@@ -50,16 +50,21 @@ export default function Ecurie() {
                 >
                   <button type="submit" className="btn btn-danger btn-sm ml-2" style={{marginLeft: '10px'}}>X</button>
                 </Form>
+
               </div>
             ))}
           </div>
         )}
 
-        {ecurie.notes && <p>{ecurie.notes}</p>}
+        <div>
+          <NavLink to="add-pilote">
+            <button type="submit" className="btn btn-info btn-sm ml-2" style={{marginTop: '10px'}}>Ajouter un pilote à l'écurie</button>
+          </NavLink>
+        </div>
 
         <div id="boutons">
           <Form action="edit">
-            <button type="submit">Modifier l'écurie</button>
+            <button type="submit" class="btn btn-primary">Modifier l'écurie</button>
           </Form>
           <Form
             method="post"
@@ -74,7 +79,7 @@ export default function Ecurie() {
               }
             }}
           >
-            <button type="submit">Supprimer écurie</button>
+            <button type="submit" class="btn btn-danger">Supprimer l'écurie</button>
           </Form>
         </div>
       </div>

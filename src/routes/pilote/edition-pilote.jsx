@@ -13,7 +13,7 @@ export async function action({request, params}) {
 export default function EditPilote() {
   const { pilote } = useLoaderData();
   const [ecuries, setEcuries] = useState([]);
-  const [selectedEcurie, setSelectedEcurie] = useState(pilote.idEcurie);
+  const [selectedEcurie, setSelectedEcurie] = useState(pilote.idEcurie || "");
 
   useEffect(() => {
     const fetchEcuries = async () => {
@@ -34,7 +34,7 @@ export default function EditPilote() {
 
   return (
     <Form method="post" id="pilote-form">
-      <h1>EDITION PILOTE</h1>
+      <h1>EDITION {pilote.nom || 'PILOTE'}</h1>
       <div>
         <span>Name</span>
         <input
@@ -91,8 +91,8 @@ export default function EditPilote() {
       
       <div id="boutons">
         <p>
-          <button type="submit">Sauvegarder</button>
-          <button type="button" onClick={handleCancel}>Annuler</button>
+          <button type="button" class="btn btn-secondary" onClick={handleCancel}>Annuler</button>
+          <button type="submit" class="btn btn-success">Sauvegarder</button>
         </p>
       </div>
     </Form>

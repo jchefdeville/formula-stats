@@ -39,7 +39,7 @@ export default function RootPilote() {
               ></div>
             </form>
             <Form method="post">
-              <button type="submit">Nouveau Pilote</button>
+              <button class="btn btn-success" type="submit">Nouveau Pilote</button>
             </Form>
           </div>
           <nav>

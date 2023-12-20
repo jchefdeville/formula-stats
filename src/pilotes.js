@@ -7,9 +7,23 @@ export async function getPilotes(query) {
   await fakeNetwork(`getPilotes:${query}`);
   let pilotes = await localforage.getItem("pilotes");
   if (!pilotes) pilotes = [];
+
+  // TODO : dépendance cyclique
+  // Récupération des écuries pour chaque pilote
+  /* const pilotesWithEcuries = await Promise.all(
+    pilotes.map(async (pilote) => {
+      // Récupération écurie du pilote
+      let ecurie = await getEcurie(pilote.idEcurie);
+      pilote.ecurie = ecurie;
+
+      return pilote;
+    })
+  ); */ 
+
   if (query) {
     pilotes = matchSorter(pilotes, query, { keys: ["prenom", "nom"] });
   }
+  
   return pilotes.sort(sortBy("nom", "createdAt"));
 }
 
@@ -29,8 +43,10 @@ export async function getPilote(id) {
   let pilote = pilotes.find(pilote => pilote.id === id);
 
   // Récupération écurie du pilote
-  let ecurie = await getEcurie(pilote.idEcurie);
-  pilote.ecurie = ecurie;
+  if (pilote) {
+    let ecurie = await getEcurie(pilote.idEcurie);
+    pilote.ecurie = ecurie;
+  }
 
   return pilote ?? null;
 }

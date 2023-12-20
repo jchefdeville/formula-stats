@@ -50,8 +50,8 @@ export default function EditEcurie() {
       </div>
 
       <div id="boutons">
-        <button type="submit">Save</button>
-        <button type="button">Cancel</button>
+        <button type="button" class="btn btn-secondary">Annuler</button>
+        <button type="submit" class="btn btn-success">Enregistrer</button>
       </div>
     </Form>
   );

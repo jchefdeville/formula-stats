@@ -12,8 +12,6 @@ export default function Pilote() {
   return (
     <div id="pilote">
 
-      <h1>DETAIL PILOTE</h1>
-
       <div>
         <img
           key={pilote.avatar}
@@ -66,7 +64,7 @@ export default function Pilote() {
 
         <div id="boutons">
           <Form action="edit">
-            <button type="submit">Edit</button>
+            <button class="btn btn-primary" type="submit">Modifier le pilote</button>
           </Form>
           <Form
             method="post"
@@ -81,7 +79,7 @@ export default function Pilote() {
               }
             }}
           >
-            <button type="submit">Delete</button>
+            <button class="btn btn-danger" type="submit">Supprimer le pilote</button>
           </Form>
         </div>
       </div>
