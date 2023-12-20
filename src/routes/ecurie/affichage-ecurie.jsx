@@ -64,7 +64,7 @@ export default function Ecurie() {
 
         <div id="boutons">
           <Form action="edit">
-            <button type="submit" class="btn btn-primary">Modifier l'écurie</button>
+            <button type="submit" className="btn btn-primary">Modifier l'écurie</button>
           </Form>
           <Form
             method="post"
@@ -79,7 +79,7 @@ export default function Ecurie() {
               }
             }}
           >
-            <button type="submit" class="btn btn-danger">Supprimer l'écurie</button>
+            <button type="submit" className="btn btn-danger">Supprimer l'écurie</button>
           </Form>
         </div>
       </div>

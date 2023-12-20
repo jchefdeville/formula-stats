@@ -39,7 +39,7 @@ export default function RootEcurie() {
               ></div>
             </form>
             <Form method="post">
-              <button type="submit">Nouvelle Ecurie</button>
+              <button className="btn btn-success" type="submit">Nouvelle Ecurie</button>
             </Form>
           </div>
           <nav>

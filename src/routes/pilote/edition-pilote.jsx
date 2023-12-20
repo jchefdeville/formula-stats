@@ -91,8 +91,8 @@ export default function EditPilote() {
       
       <div id="boutons">
         <p>
-          <button type="button" class="btn btn-secondary" onClick={handleCancel}>Annuler</button>
-          <button type="submit" class="btn btn-success">Sauvegarder</button>
+          <button type="button" className="btn btn-secondary" onClick={handleCancel}>Annuler</button>
+          <button type="submit" className="btn btn-success">Sauvegarder</button>
         </p>
       </div>
     </Form>

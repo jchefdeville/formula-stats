@@ -31,7 +31,6 @@ export default function AddPiloteToEcurie() {
   
       // TODO : se baser plutôt sur l'écurie à null
       const pilotesWithoutEcurie = pilotesData.filter((pilote) => {
-        console.log(pilote.nom + " " + pilote.idEcurie);
         return !(pilote.idEcurie !== null && pilote.idEcurie !== '--');
       });
   
@@ -59,8 +58,8 @@ export default function AddPiloteToEcurie() {
 
       <div id="boutons">
         <p>
-          <button type="button" class="btn btn-danger">Annuler</button>
-          <button type="submit" class="btn btn-success">Enregistrer</button>
+          <button type="button" className="btn btn-danger">Annuler</button>
+          <button type="submit" className="btn btn-success">Enregistrer</button>
         </p>
       </div>
     </Form>

@@ -64,7 +64,7 @@ export default function Pilote() {
 
         <div id="boutons">
           <Form action="edit">
-            <button class="btn btn-primary" type="submit">Modifier le pilote</button>
+            <button className="btn btn-primary" type="submit">Modifier le pilote</button>
           </Form>
           <Form
             method="post"
@@ -79,7 +79,7 @@ export default function Pilote() {
               }
             }}
           >
-            <button class="btn btn-danger" type="submit">Supprimer le pilote</button>
+            <button className="btn btn-danger" type="submit">Supprimer le pilote</button>
           </Form>
         </div>
       </div>
