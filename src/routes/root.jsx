@@ -21,38 +21,53 @@ export default function Root() {
           <h1>React Router Pilotes</h1>
           <nav>
             <nav>
-            <ul>
-                <li>
-                  <NavLink
-                    to="pilotes"
-                    className={({ isActive, isPending }) =>
-                      isActive
-                        ? "active"
-                        : isPending
-                        ? "pending"
-                        : ""
-                    }
-                  >
-                  Pilotes
-                  </NavLink>
-                </li>
+              <ul>
+                  <li>
+                    <NavLink
+                      to="pilotes"
+                      className={({ isActive, isPending }) =>
+                        isActive
+                          ? "active"
+                          : isPending
+                          ? "pending"
+                          : ""
+                      }
+                    >
+                    Pilotes
+                    </NavLink>
+                  </li>
 
-                <li>
-                  <NavLink
-                    to="ecuries"
-                    className={({ isActive, isPending }) =>
-                      isActive
-                        ? "active"
-                        : isPending
-                        ? "pending"
-                        : ""
-                    }
-                  >
-                  Ecuries
-                  </NavLink>
-                </li>
-            </ul>
-        </nav>
+                  <li>
+                    <NavLink
+                      to="ecuries"
+                      className={({ isActive, isPending }) =>
+                        isActive
+                          ? "active"
+                          : isPending
+                          ? "pending"
+                          : ""
+                      }
+                    >
+                    Ecuries
+                    </NavLink>
+                  </li>
+
+                  <li>
+                    <NavLink
+                      to="saisons"
+                      className={({ isActive, isPending }) =>
+                        isActive
+                          ? "active"
+                          : isPending
+                          ? "pending"
+                          : ""
+                      }
+                    >
+                    Saisons
+                    </NavLink>
+                  </li>
+              </ul>
+            </nav>
           </nav>
         </div>
         <div id="detail"

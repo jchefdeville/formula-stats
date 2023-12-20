@@ -29,6 +29,9 @@ import { action as destroyEcurieAction } from "./routes/ecurie/destroy-ecurie";
 import { action as removePiloteFromEcurieAction } from "./routes/ecurie/remove-pilote-from-ecurie";
 import AddPiloteToEcurie, { action as addPiloteToEcurieAction } from "./routes/ecurie/add-pilote-to-ecurie";
 
+// Saisons
+import SaisonRoot, { loader as rootSaisonLoader, action as rootSaisonAction } from "./routes/saison/root-saison";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -91,6 +94,14 @@ const router = createBrowserRouter([
       element : <AddPiloteToEcurie/>,
       loader: ecurieLoader,
       action: addPiloteToEcurieAction
+    },
+
+    // Saisons
+    {
+      path: "/saisons/",
+      element : <SaisonRoot/>,
+      loader: rootSaisonLoader,
+      action : rootSaisonAction
     }
   ],
   }
