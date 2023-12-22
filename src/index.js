@@ -31,6 +31,12 @@ import SaisonRoot, { loader as rootSaisonLoader, action as rootSaisonAction } fr
 import Saison, {loader as saisonLoader} from "./routes/saison/affichage-saison";
 import EditSaison, { action as editSaisonAction } from "./routes/saison/edition-saison";
 
+// Circuits
+import CircuitRoot, { loader as rootCircuitLoader, action as rootCircuitAction } from "./routes/circuit/root-circuit";
+import Circuit, { loader as circuitLoader } from "./routes/circuit/affichage-circuit";
+import EditionCircuit, {action as editCircuitAction} from "./routes/circuit/edition-circuit";
+import { action as destroyCircuitAction } from "./routes/circuit/destroy-circuit";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -110,7 +116,30 @@ const router = createBrowserRouter([
       element : <EditSaison/>,
       loader: saisonLoader,
       action: editSaisonAction
-    }
+    },
+
+    // Circuits
+    {
+      path: "/circuits/",
+      element : <CircuitRoot/>,
+      loader: rootCircuitLoader,
+      action : rootCircuitAction
+    },
+    {
+      path: "/circuits/:idCircuit/",
+      element : <Circuit/>,
+      loader: circuitLoader
+    },
+    {
+      path: "/circuits/:idCircuit/edit",
+      element : <EditionCircuit/>,
+      loader: circuitLoader,
+      action: editCircuitAction
+    },
+    {
+      path: "/circuits/:idCircuit/destroy",
+      action: destroyCircuitAction
+    },
   ],
   }
 ]);

@@ -10,8 +10,6 @@ export async function getSaisons(query) {
   if (query) {
     saisons = matchSorter(saisons, query, { keys: ["prenom", "nom"] });
   }
-
-  console.log(saisons.length);
   
   return saisons.sort(sortBy("nom", "createdAt"));
 }

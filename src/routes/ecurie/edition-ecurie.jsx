@@ -1,4 +1,4 @@
-import { Form, useLoaderData, redirect } from "react-router-dom";
+import { Form, useLoaderData, redirect, useNavigate } from "react-router-dom";
 import { updateEcurie } from "../../controller/ecuries";
 
 export async function action({request, params}) {
@@ -11,6 +11,12 @@ export async function action({request, params}) {
 
 export default function EditEcurie() {
   const { ecurie } = useLoaderData();
+
+  const navigate = useNavigate();
+
+  const handleCancel = () => {
+    navigate(`/ecuries/${ecurie.id}`);
+  };
 
   return (
     <Form method="post" id="ecurie-form">
@@ -50,7 +56,7 @@ export default function EditEcurie() {
       </div>
 
       <div id="boutons">
-        <button type="button" className="btn btn-secondary">Annuler</button>
+        <button type="button" className="btn btn-secondary" onClick={handleCancel}>Annuler</button>
         <button type="submit" className="btn btn-success">Enregistrer</button>
       </div>
     </Form>

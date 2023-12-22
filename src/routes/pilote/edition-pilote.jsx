@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Form, useLoaderData, redirect } from "react-router-dom";
+import { Form, useLoaderData, redirect, useNavigate } from "react-router-dom";
 import { getEcuries } from "../../controller/ecuries";
 import { updatePilote } from "../../controller/pilotes";
 
@@ -15,6 +15,8 @@ export default function EditPilote() {
   const [ecuries, setEcuries] = useState([]);
   const [selectedEcurie, setSelectedEcurie] = useState(pilote.idEcurie || "");
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchEcuries = async () => {
       const ecuriesData = await getEcuries();
@@ -29,7 +31,7 @@ export default function EditPilote() {
   };
 
   const handleCancel = () => {
-    redirect(`/pilotes/${pilote.id}`);
+    navigate(`/pilotes/${pilote.id}`);
   };
 
   return (

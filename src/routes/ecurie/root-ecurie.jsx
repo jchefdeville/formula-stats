@@ -58,14 +58,13 @@ export default function RootEcurie() {
                         : ""
                     }
                   >
-                    {ecurie.prenom || ecurie.nom ? (
+                    {ecurie.nom ? (
                       <>
-                        {ecurie.prenom} {ecurie.nom }
+                        {ecurie.nom }
                       </>
                     ) : (
                       <i>No Name</i>
-                    )}{" "}
-                    {ecurie.favorite && <span>★</span>}
+                    )}
                   </NavLink>
                 </li>
               ))}

@@ -53,6 +53,21 @@ export default function Root() {
                     Saisons
                     </NavLink>
                   </li>
+
+                  <li>
+                    <NavLink
+                      to="circuits"
+                      className={({ isActive, isPending }) =>
+                        isActive
+                          ? "active"
+                          : isPending
+                          ? "pending"
+                          : ""
+                      }
+                    >
+                    Circuits
+                    </NavLink>
+                  </li>
               </ul>
             </nav>
           </nav>

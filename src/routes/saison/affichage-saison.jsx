@@ -3,7 +3,6 @@ import { getSaison } from "../../controller/saisons";
 
 export async function loader({ params }) {
     const saison = await getSaison(params.idSaison);
-    console.log(saison);
     return { saison }
 }
 
