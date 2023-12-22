@@ -1,5 +1,5 @@
 import { Outlet, NavLink, useLoaderData, Form, redirect, useNavigation} from "react-router-dom";
-import { getSaisons, createSaison } from "../../saisons";
+import { getSaisons, createSaison } from "../../controller/saisons";
 
 export async function loader() {
     const saisons = await getSaisons();
@@ -18,7 +18,6 @@ export default function RootSaison() {
       <>
         <div id="sidebar">
 
-          <h1>React Router Saisons</h1>
           <div>
             <form id="search-form" role="search">
               <input
@@ -64,8 +63,7 @@ export default function RootSaison() {
                           </>
                         ) : (
                           <i>No Année</i>
-                        )}{" "}
-                        {saison.numero && <> #{saison.numero}</>}
+                        )}
                       </NavLink>
                     </li>
                   ))}

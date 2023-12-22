@@ -1,20 +1,19 @@
 import React from 'react';
 import { Form, useLoaderData, redirect } from "react-router-dom";
-import { updateSaison } from '../../saisons';
+import { updateSaison } from '../../controller/saisons';
 
 export async function action({request, params}) {
     const formData = await request.formData();
     const updates = Object.fromEntries(formData);
-    await updateSaison
-    (params.idPilote, updates);
-    return redirect(`/saisons/${params.idPilote}`);
+    await updateSaison(params.idSaison, updates);
+    return redirect(`/saisons/${params.idSaison}`);
 }
 
 export default function EditSaison() {
   const { saison } = useLoaderData();
 
   const handleCancel = () => {
-    redirect(`/saisons/${saison.id}`);
+    redirect(`saisons/${saison.id}`);
   };
 
   return (

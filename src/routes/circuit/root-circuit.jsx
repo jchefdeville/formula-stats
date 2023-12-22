@@ -18,6 +18,7 @@ export default function RootEcurie() {
       <>
         <div id="sidebar">
 
+          <h1>React Router Ecuries</h1>
           <div>
             <form id="search-form" role="search">
               <input

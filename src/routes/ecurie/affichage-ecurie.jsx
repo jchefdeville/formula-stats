@@ -1,5 +1,5 @@
 import { Form, useLoaderData, NavLink  } from "react-router-dom";
-import { getEcurie } from "../../ecuries";
+import { getEcurie } from "../../controller/ecuries";
 
 export async function loader({ params }) {
     const ecurie = await getEcurie(params.idEcurie);
@@ -15,6 +15,7 @@ export default function Ecurie() {
         <img
           key={ecurie.avatar}
           src={ecurie.avatar || null}
+          alt="ecurie"
           width={100}
         />
       </div>

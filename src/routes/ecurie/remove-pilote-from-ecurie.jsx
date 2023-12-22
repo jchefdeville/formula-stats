@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import { getPilote, updatePilote } from "../../pilotes";
+import { getPilote, updatePilote } from "../../controller/pilotes";
 
 export async function action({ params }) {
     let pilote = await getPilote(params.idPilote);

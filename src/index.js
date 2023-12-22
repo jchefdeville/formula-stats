@@ -8,10 +8,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import Root, 
-{ loader as rootLoader,
-action as rootAction } 
-from "./routes/root";
+import Root from "./routes/root";
 
 import ErrorPage from "./error-page";
 
@@ -31,14 +28,14 @@ import AddPiloteToEcurie, { action as addPiloteToEcurieAction } from "./routes/e
 
 // Saisons
 import SaisonRoot, { loader as rootSaisonLoader, action as rootSaisonAction } from "./routes/saison/root-saison";
+import Saison, {loader as saisonLoader} from "./routes/saison/affichage-saison";
+import EditSaison, { action as editSaisonAction } from "./routes/saison/edition-saison";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root/>,
     errorElement : <ErrorPage/>,
-    loader : rootLoader,
-    action : rootAction,
 
     // Pilotes
     children : [{
@@ -102,6 +99,17 @@ const router = createBrowserRouter([
       element : <SaisonRoot/>,
       loader: rootSaisonLoader,
       action : rootSaisonAction
+    },
+    {
+      path: "/saisons/:idSaison/",
+      element : <Saison/>,
+      loader: saisonLoader
+    },
+    {
+      path: "/saisons/:idSaison/edit",
+      element : <EditSaison/>,
+      loader: saisonLoader,
+      action: editSaisonAction
     }
   ],
   }

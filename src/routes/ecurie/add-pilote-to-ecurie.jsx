@@ -1,5 +1,5 @@
 import { Form, useLoaderData, redirect } from "react-router-dom";
-import { getPilotes, getPilote, updatePilote } from "../../pilotes";
+import { getPilotes, getPilote, updatePilote } from "../../controller/pilotes";
 import { useEffect, useState } from "react";
 
 export async function action({request, params}) {

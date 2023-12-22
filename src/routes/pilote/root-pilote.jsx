@@ -1,5 +1,5 @@
 import { Outlet, NavLink, useLoaderData, Form, redirect, useNavigation} from "react-router-dom";
-import { getPilotes, createPilote } from "../../pilotes";
+import { getPilotes, createPilote } from "../../controller/pilotes";
 
 export async function loader() {
     const pilotes = await getPilotes();
@@ -18,7 +18,6 @@ export default function RootPilote() {
       <>
         <div id="sidebar">
 
-          <h1>React Router Pilotes</h1>
           <div>
             <form id="search-form" role="search">
               <input

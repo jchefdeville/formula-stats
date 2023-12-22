@@ -1,5 +1,5 @@
 import { Form, useLoaderData, NavLink } from "react-router-dom";
-import { getPilote } from "../../pilotes";
+import { getPilote } from "../../controller/pilotes";
 
 export async function loader({ params }) {
     const pilote = await getPilote(params.idPilote);
@@ -16,6 +16,7 @@ export default function Pilote() {
         <img
           key={pilote.avatar}
           src={pilote.avatar || null}
+          alt="pilote"
           width={100}
         />
       </div>
@@ -54,6 +55,7 @@ export default function Pilote() {
             <a
               target="_blank"
               href={`https://twitter.com/${pilote.twitter}`}
+              rel="noreferrer"
             >
               {pilote.twitter}
             </a>

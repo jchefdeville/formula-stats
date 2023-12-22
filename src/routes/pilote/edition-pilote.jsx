@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Form, useLoaderData, redirect } from "react-router-dom";
-import { getEcuries } from "../../ecuries";
-import { updatePilote } from "../../pilotes";
+import { getEcuries } from "../../controller/ecuries";
+import { updatePilote } from "../../controller/pilotes";
 
 export async function action({request, params}) {
     const formData = await request.formData();
