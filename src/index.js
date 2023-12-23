@@ -31,11 +31,18 @@ import SaisonRoot, { loader as rootSaisonLoader, action as rootSaisonAction } fr
 import Saison, {loader as saisonLoader} from "./routes/saison/affichage-saison";
 import EditSaison, { action as editSaisonAction } from "./routes/saison/edition-saison";
 
+// Grands Prix
+import GrandPrixRoot, { loader as rootGrandPrixLoader, action as rootGrandPrixAction } from "./routes/grand-prix/root-grand-prix";
+import GrandPrix, { loader as grandPrixLoader } from "./routes/grand-prix/affichage-grand-prix";
+import EditionGrandPrix, {action as editGrandPrixAction} from "./routes/grand-prix/edition-grand-prix";
+import { action as destroyGrandPrixAction } from "./routes/grand-prix/destroy-grand-prix";
+
 // Circuits
 import CircuitRoot, { loader as rootCircuitLoader, action as rootCircuitAction } from "./routes/circuit/root-circuit";
 import Circuit, { loader as circuitLoader } from "./routes/circuit/affichage-circuit";
 import EditionCircuit, {action as editCircuitAction} from "./routes/circuit/edition-circuit";
 import { action as destroyCircuitAction } from "./routes/circuit/destroy-circuit";
+
 
 const router = createBrowserRouter([
   {
@@ -116,6 +123,29 @@ const router = createBrowserRouter([
       element : <EditSaison/>,
       loader: saisonLoader,
       action: editSaisonAction
+    },
+
+    // Grands Prix
+    {
+      path: "/grands-prix/",
+      element : <GrandPrixRoot/>,
+      loader: rootGrandPrixLoader,
+      action : rootGrandPrixAction
+    },
+    {
+      path: "/grands-prix/:idGrandPrix/",
+      element : <GrandPrix/>,
+      loader: grandPrixLoader
+    },
+    {
+      path: "/grands-prix/:idGrandPrix/edit",
+      element : <EditionGrandPrix/>,
+      loader: grandPrixLoader,
+      action: editGrandPrixAction
+    },
+    {
+      path: "/grands-prix/:idGrandPrix/destroy",
+      action: destroyGrandPrixAction
     },
 
     // Circuits

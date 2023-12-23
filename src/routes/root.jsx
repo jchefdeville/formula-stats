@@ -1,3 +1,4 @@
+import React from 'react';
 import { Outlet, NavLink, useNavigation} from "react-router-dom";
 
 export default function Root() {
@@ -51,6 +52,21 @@ export default function Root() {
                       }
                     >
                     Saisons
+                    </NavLink>
+                  </li>
+
+                  <li>
+                    <NavLink
+                      to="grands-prix"
+                      className={({ isActive, isPending }) =>
+                        isActive
+                          ? "active"
+                          : isPending
+                          ? "pending"
+                          : ""
+                      }
+                    >
+                    Grands Prix
                     </NavLink>
                   </li>
 

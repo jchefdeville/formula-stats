@@ -1,20 +1,21 @@
 import React from 'react';
 import { Outlet, NavLink, useLoaderData, Form, redirect, useNavigation} from "react-router-dom";
-import { getSaisons, createSaison } from "../../controller/saisons";
+import { createGrandPrix, getGrandsPrix } from "../../controller/grands-prix";
 
 export async function loader() {
-    const saisons = await getSaisons();
-    return { saisons }
+    const grandsPrix = await getGrandsPrix();
+    return { grandsPrix }
 }
 
 export async function action() {
-    const saison  = await createSaison();
-    return redirect(`/saisons/${saison.id}/edit`);
+    const grandPrix  = await createGrandPrix();
+    return redirect(`/grands-prix/${grandPrix.id}/edit`);
 }
 
-export default function RootSaison() {
-    const { saisons } = useLoaderData();
+export default function RootCircuit() {
+    const { grandsPrix } = useLoaderData();
     const navigation = useNavigation();
+
     return (
       <>
         <div id="sidebar">
@@ -23,8 +24,8 @@ export default function RootSaison() {
             <form id="search-form" role="search">
               <input
                 id="q"
-                aria-label="Search saisons"
-                placeholder="Rechercher saison"
+                aria-label="Search circuits"
+                placeholder="Rechercher circuit"
                 type="search"
                 name="q"
               />
@@ -39,17 +40,17 @@ export default function RootSaison() {
               ></div>
             </form>
             <Form method="post">
-              <button className="btn btn-success" type="submit">Nouvelle Saison</button>
+              <button className="btn btn-success" type="submit">Nouveau Circuit</button>
             </Form>
           </div>
           <nav>
             <nav>
-              {saisons.length ? (
+              {grandsPrix.length ? (
                 <ul>
-                  {saisons.map((saison) => (
-                    <li key={saison.id}>
+                  {grandsPrix.map((grandPrix) => (
+                    <li key={grandPrix.id}>
                       <NavLink
-                        to={`/saisons/${saison.id}`}
+                        to={`/grands-prix/${grandPrix.id}`}
                         className={({ isActive, isPending }) =>
                           isActive
                             ? "active"
@@ -58,12 +59,12 @@ export default function RootSaison() {
                             : ""
                         }
                       >
-                        {saison.annee ? (
+                        {grandPrix.nom ? (
                           <>
-                            {saison.annee}
+                            {grandPrix.nom }
                           </>
                         ) : (
-                          <i>No Année</i>
+                          <i>No Name</i>
                         )}
                       </NavLink>
                     </li>
@@ -71,20 +72,18 @@ export default function RootSaison() {
                 </ul>
               ) : (
                 <p>
-                  <i>No saisons</i>
+                  <i>No grands prix</i>
                 </p>
               )}
             </nav>
           </nav>
         </div>
-
         <div id="detail"
             className={
                 navigation.state === "loading" ? "loading" : ""
             }>
             <Outlet/>
         </div>
-
       </>
     );
   }

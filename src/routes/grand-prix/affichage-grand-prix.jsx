@@ -1,37 +1,38 @@
 import React from 'react';
 import { Form, useLoaderData } from "react-router-dom";
-import { getCircuit } from "../../controller/circuits";
+import { getGrandPrix } from "../../controller/grands-prix";
 
 export async function loader({ params }) {
-    const circuit = await getCircuit(params.idCircuit);
-    return { circuit }
+    const grandPrix = await getGrandPrix(params.idGrandPrix);
+    return { grandPrix }
 }
 
 export default function Circuit() {
-  const { circuit } = useLoaderData();
+  const { grandPrix } = useLoaderData();
 
   return (
-    <div id="circuit">
+    <div id="grandPrix">
 
       <div>
         <img
-          key={circuit.avatar}
-          src={circuit.avatar || null}
-          alt="circuit"
+          key={grandPrix.avatar}
+          src={grandPrix.avatar || null}
+          alt="grandPrix"
           width={100}
         />
       </div>
 
       <div>
         <h1>
-          {circuit.nom}
+          {grandPrix.nom}
+          {grandPrix.idSaison} {grandPrix.idCircuit}
         </h1>
         
-        {circuit.notes && <p>{circuit.notes}</p>}
+        {grandPrix.notes && <p>{grandPrix.notes}</p>}
 
         <div id="boutons">
           <Form action="edit">
-            <button className="btn btn-primary" type="submit">Modifier le circuit</button>
+            <button className="btn btn-primary" type="submit">Modifier le grand prix</button>
           </Form>
           <Form
             method="post"
@@ -46,7 +47,7 @@ export default function Circuit() {
               }
             }}
           >
-            <button className="btn btn-danger" type="submit">Supprimer le circuit</button>
+            <button className="btn btn-danger" type="submit">Supprimer le grand prix</button>
           </Form>
         </div>
       </div>
