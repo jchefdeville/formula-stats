@@ -1,24 +1,11 @@
 import localforage from "localforage";
 import { matchSorter } from "match-sorter";
 import sortBy from "sort-by";
-import { getEcurie } from "./ecuries";
 
 export async function getPilotes(query) {
   await fakeNetwork(`getPilotes:${query}`);
   let pilotes = await localforage.getItem("pilotes");
   if (!pilotes) pilotes = [];
-
-  // TODO : dépendance cyclique
-  // Récupération des écuries pour chaque pilote
-  /* const pilotesWithEcuries = await Promise.all(
-    pilotes.map(async (pilote) => {
-      // Récupération écurie du pilote
-      let ecurie = await getEcurie(pilote.idEcurie);
-      pilote.ecurie = ecurie;
-
-      return pilote;
-    })
-  ); */ 
 
   if (query) {
     pilotes = matchSorter(pilotes, query, { keys: ["prenom", "nom"] });
@@ -41,12 +28,6 @@ export async function getPilote(id) {
   await fakeNetwork(`pilote:${id}`);
   let pilotes = await localforage.getItem("pilotes");
   let pilote = pilotes.find(pilote => pilote.id === id);
-
-  // Récupération écurie du pilote
-  if (pilote) {
-    let ecurie = await getEcurie(pilote.idEcurie);
-    pilote.ecurie = ecurie;
-  }
 
   return pilote ?? null;
 }

@@ -1,14 +1,18 @@
 import React from 'react';
 import { Form, useLoaderData, NavLink } from "react-router-dom";
 import { getPilote } from "../../controller/pilotes";
+import { getEcurie } from '../../controller/ecuries';
 
 export async function loader({ params }) {
     const pilote = await getPilote(params.idPilote);
-    return { pilote }
+
+    const ecurie = await getEcurie(pilote.idEcurie);
+
+    return { pilote, ecurie }
 }
 
 export default function Pilote() {
-  const { pilote } = useLoaderData();
+  const { pilote, ecurie } = useLoaderData();
 
   return (
     <div id="pilote">
@@ -25,19 +29,19 @@ export default function Pilote() {
       <div>
         <h1>
           {pilote.prenom} {' '}
-          <span style={{ color: pilote.ecurie && pilote.ecurie.couleur }}>
+          <span style={{ color: ecurie && ecurie.couleur }}>
             {pilote.nom}
           </span>
           {pilote.numero && <> #{pilote.numero}</>}
         </h1>
 
-        {pilote.ecurie && (
+        {ecurie && (
           <div>
             <h2>Ecurie</h2>
             <NavLink
-              key={pilote.ecurie.id}
-              to={`/ecuries/${pilote.ecurie.id}`}
-              style={{ color: pilote.ecurie.couleur }}
+              key={ecurie.id}
+              to={`/ecuries/${ecurie.id}`}
+              style={{ color: ecurie.couleur }}
               className={({ isActive, isPending }) =>
                 isActive
                   ? "active"
@@ -46,7 +50,7 @@ export default function Pilote() {
                   : ""
               }
               >
-              {pilote.ecurie.nom}
+              {ecurie.nom}
             </NavLink>
           </div>
         )}

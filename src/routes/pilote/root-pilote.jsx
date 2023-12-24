@@ -1,3 +1,4 @@
+import React from 'react';
 import { Outlet, NavLink, useLoaderData, Form, redirect, useNavigation} from "react-router-dom";
 import { getPilotes, createPilote } from "../../controller/pilotes";
 
@@ -14,6 +15,7 @@ export async function action() {
 export default function RootPilote() {
     const { pilotes } = useLoaderData();
     const navigation = useNavigation();
+    
     return (
       <>
         <div id="sidebar">

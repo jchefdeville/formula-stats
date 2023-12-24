@@ -1,13 +1,21 @@
+import React from 'react';
 import { Form, useLoaderData, NavLink  } from "react-router-dom";
 import { getEcurie } from "../../controller/ecuries";
+import { getPilotes } from '../../controller/pilotes';
 
 export async function loader({ params }) {
     const ecurie = await getEcurie(params.idEcurie);
-    return { ecurie }
+
+    let pilotes = await getPilotes();
+    pilotes = pilotes.filter((pilote) => {
+      return pilote.idEcurie === params.idEcurie
+    });
+    
+    return { ecurie, pilotes };
 }
 
 export default function Ecurie() {
-    const { ecurie } = useLoaderData();
+    const { ecurie, pilotes } = useLoaderData();
 
   return (
     <div id="ecurie">
@@ -27,10 +35,10 @@ export default function Ecurie() {
           </h1>
         </div>
 
-        {ecurie.pilotes.length > 0 && (
+        {pilotes.length > 0 && (
           <div>
             <h2>Pilotes</h2>
-            {ecurie.pilotes.map((pilote) => (
+            {pilotes.map((pilote) => (
               <div key={pilote.id} className="d-flex align-items-center">
                 <NavLink
                   to={`/pilotes/${pilote.id}`}
@@ -59,13 +67,13 @@ export default function Ecurie() {
 
         <div>
           <NavLink to="add-pilote">
-            <button type="submit" className="btn btn-info btn-sm ml-2" style={{marginTop: '10px'}}>Ajouter un pilote à l'écurie</button>
+            <button type="submit" className="btn btn-info btn-sm ml-2" style={{marginTop: '10px'}}>Ajouter un pilote à l&apos;écurie</button>
           </NavLink>
         </div>
 
         <div id="boutons">
           <Form action="edit">
-            <button type="submit" className="btn btn-primary">Modifier l'écurie</button>
+            <button type="submit" className="btn btn-primary">Modifier l&apos;écurie</button>
           </Form>
           <Form
             method="post"
@@ -80,7 +88,7 @@ export default function Ecurie() {
               }
             }}
           >
-            <button type="submit" className="btn btn-danger">Supprimer l'écurie</button>
+            <button type="submit" className="btn btn-danger">Supprimer l&apos;écurie</button>
           </Form>
         </div>
       </div>

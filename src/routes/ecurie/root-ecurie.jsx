@@ -1,3 +1,4 @@
+import React from 'react';
 import { Outlet, NavLink, useLoaderData, Form, redirect, useNavigation} from "react-router-dom";
 import { getEcuries, createEcurie } from "../../controller/ecuries";
 
