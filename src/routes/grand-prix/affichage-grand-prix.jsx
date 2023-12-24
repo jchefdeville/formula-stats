@@ -1,14 +1,19 @@
 import React from 'react';
 import { Form, useLoaderData } from "react-router-dom";
 import { getGrandPrix } from "../../controller/grands-prix";
+import { getSaison } from '../../controller/saisons';
+import { getCircuit } from '../../controller/circuits';
 
 export async function loader({ params }) {
-    const grandPrix = await getGrandPrix(params.idGrandPrix);
-    return { grandPrix }
+  const grandPrix = await getGrandPrix(params.idGrandPrix);
+  const saison = await getSaison(grandPrix.idSaison);
+  const circuit = await getCircuit(grandPrix.idCircuit);
+
+  return { grandPrix, saison, circuit };
 }
 
 export default function Circuit() {
-  const { grandPrix } = useLoaderData();
+  const { grandPrix, saison, circuit } = useLoaderData();
 
   return (
     <div id="grandPrix">
@@ -24,8 +29,7 @@ export default function Circuit() {
 
       <div>
         <h1>
-          {grandPrix.nom}
-          {grandPrix.idSaison} {grandPrix.idCircuit}
+          {saison.annee} - {circuit.nom}
         </h1>
         
         {grandPrix.notes && <p>{grandPrix.notes}</p>}

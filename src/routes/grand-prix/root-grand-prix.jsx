@@ -1,10 +1,25 @@
 import React from 'react';
 import { Outlet, NavLink, useLoaderData, Form, redirect, useNavigation} from "react-router-dom";
 import { createGrandPrix, getGrandsPrix } from "../../controller/grands-prix";
+import { getSaison } from '../../controller/saisons';
+import { getCircuit } from '../../controller/circuits';
 
 export async function loader() {
     const grandsPrix = await getGrandsPrix();
-    return { grandsPrix }
+    
+    // Pour chaque grand prix, récupérer les détails de la saison et du circuit
+    const grandsPrixDetails = await Promise.all(
+      grandsPrix.map(async (grandPrix) => {
+        const saison = await getSaison(grandPrix.idSaison);
+        const circuit = await getCircuit(grandPrix.idCircuit);
+
+        // Ajouter le nom du grand prix à l'objet grandPrix
+        grandPrix.nom= `${saison.annee} - ${circuit.nom}`;
+        return grandPrix;
+      })
+    );
+
+    return { grandsPrix: grandsPrixDetails };
 }
 
 export async function action() {
